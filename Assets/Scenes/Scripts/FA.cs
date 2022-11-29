@@ -68,18 +68,21 @@ public class FA : MonoBehaviour
 
     decimal CheckGreaterFraction = 0; //this will help calculate the difference between fraction A and B, which we will use to determine where fraction A or B should go in order to avoid negative results 
 
-    public GameObject gameOver, bingo, CongratulatePanel;
+    public GameObject gameOver, bingo, CongratulatePanelApple, CongratulatePanelStraw, CongratulatePanelGrapes;
     
 
     public bool bingoPossible = true;
     public bool myBingo = false;
-    public static int incrementBingo;
+    public static int incrementAppleBingo;
+    public static int incrementStrawBingo;
+    public static int incrementGrapesBingo;
     public static int easyScore;
     public static int medScore;
     public static int hardScore;
     public static int easyProblemCount;
     public static int hardProblemCount;
     public static int medProblemCount;
+    public static string bingoType;
     public static bool h1 = true;
     public static bool h2 = true;
     public static bool h3 = true;
@@ -481,10 +484,24 @@ public class FA : MonoBehaviour
 
         if (h_1 || h_2 || h_3 || h_4 || h_5 || v_1 || v_2 || v_3 || v_4 || v_5 || d_1 || d_2)
         {
+            if(h_1 || h_2 || h_3 || h_4 || h_5)
+            {
+                bingoType = "hBingo";
+                incrementAppleBingo = incrementAppleBingo + 1;
+
+            }
+            else if (v_1 || v_2 || v_3 || v_4 || v_5)
+            {
+                bingoType = "vBingo";
+                incrementStrawBingo= incrementStrawBingo + 1;
+            }
+            else
+            {
+                bingoType = "dBingo";
+                incrementGrapesBingo= incrementGrapesBingo + 1; 
+            }
             myBingo = true;
             bingo.SetActive(true);
-            incrementBingo = incrementBingo + 1;
-            Debug.Log("increment bongo" + incrementBingo);
             questionTextObject.text = "";
             Debug.Log("Bingo!");
             resetVariables();
@@ -1004,7 +1021,18 @@ public class FA : MonoBehaviour
         if (bingoOrNot == "BINGO")
         {
             yield return new WaitForSeconds(2f);
-            CongratulatePanel.SetActive(true);
+            if (bingoType=="hBingo")
+            {
+                CongratulatePanelApple.SetActive(true);
+            }
+            else if (bingoType=="vBingo")
+            {
+                CongratulatePanelStraw.SetActive(true);
+            }
+            else
+            {
+                CongratulatePanelGrapes.SetActive(true);
+            }
             yield return new WaitForSeconds(3f);
             SceneManager.LoadScene("MainScene");
         }

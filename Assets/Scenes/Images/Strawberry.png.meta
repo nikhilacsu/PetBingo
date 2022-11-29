@@ -134,17 +134,17 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 213
-        height: 304
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        width: 219
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 694e06ed881709f419c3c2cbe5137beb
-      internalID: -577480291
+      spriteID: d2407dd5d5dc15c49b749e39b695089b
+      internalID: 9833970
       vertices: []
       indices: 
       edges: []
@@ -153,19 +153,19 @@ TextureImporter:
       name: Strawberry_1
       rect:
         serializedVersion: 2
-        x: 213
+        x: 219
         y: 0
-        width: 210
-        height: 304
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        width: 219
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 030154ae9259d1b4db26c66b89a79a10
-      internalID: -332236096
+      spriteID: a5625a0f0b9327f408a06fb5dc7994ed
+      internalID: -129030081
       vertices: []
       indices: 
       edges: []
@@ -174,19 +174,19 @@ TextureImporter:
       name: Strawberry_2
       rect:
         serializedVersion: 2
-        x: 423
+        x: 438
         y: 0
-        width: 211
-        height: 304
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        width: 219
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47098ea42f731cd43ac605fd029901f0
-      internalID: -865509831
+      spriteID: 351ecd6517fe4154ebbab2ffe5bc1e76
+      internalID: -267979346
       vertices: []
       indices: 
       edges: []
@@ -195,19 +195,40 @@ TextureImporter:
       name: Strawberry_3
       rect:
         serializedVersion: 2
-        x: 634
+        x: 657
         y: 0
-        width: 186
-        height: 304
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        width: 219
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c6388ef83258a8498e5e55e7000e818
-      internalID: 1667269122
+      spriteID: d43065e8f16d6cf4bb7b339d9ef28081
+      internalID: -595628056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Strawberry_4
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 0
+        width: 219
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01d9fb36484f8124a82a4ed9153221dd
+      internalID: 1431727911
       vertices: []
       indices: 
       edges: []
@@ -215,7 +236,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3396399bab4984c4690ab01d9f04b9aa
+    spriteID: 3dcba79a1284ea94c8362acfd12b886c
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +244,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Strawberry_0: -577480291
-      Strawberry_1: -332236096
-      Strawberry_2: -865509831
-      Strawberry_3: 1667269122
+      Strawberry_4: 1431727911
+      Strawberry_0: 9833970
+      Strawberry_1: -129030081
+      Strawberry_2: -267979346
+      Strawberry_3: -595628056
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

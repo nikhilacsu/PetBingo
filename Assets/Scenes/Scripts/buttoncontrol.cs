@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -8,14 +8,9 @@ public class buttoncontrol : MonoBehaviour
 {
     public TextMeshProUGUI user_name;
     public TMP_InputField user_inputField;
+    public static string userName;
 
-    //public void Awake()
-    //{
-    //    PlayerPrefs.SetString("Name", "Player1");
-    //    PlayerPrefs.Save();
-    //}
-
-     void Start()
+    void Start()
     {
         user_name.text = PlayerPrefs.GetString("Name");
     }
@@ -24,19 +19,10 @@ public class buttoncontrol : MonoBehaviour
     {
         
         user_name.text = user_inputField.text;
+        userName=user_name.text;
 
         PlayerPrefs.SetString("Name",user_name.text);
         PlayerPrefs.Save();
     }
-
-    //public void SetString(string KeyName, string Value)
-    //{
-    //    PlayerPrefs.SetString(KeyName, Value);
-    //}
-
-    //public string GetString(string KeyName)
-    //{
-    //    return PlayerPrefs.GetString(KeyName);
-    //}
 
 }
