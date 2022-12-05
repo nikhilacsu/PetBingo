@@ -20,12 +20,12 @@ Android,iOS.
 ### Second Screen:
 Click on the new player if you want to start playing the game.
 
-<img width="491" alt="s2" src="https://user-images.githubusercontent.com/113261541/201192499-fc030008-045e-437e-be35-66e6cd83bc94.png">
+<img width="459" alt="Screenshot_20221205_025901" src="https://user-images.githubusercontent.com/113261541/205762308-4d5a2303-d04d-4171-b3a1-55453f40b764.png">
 
 ### Third Screen:
 Click on the Fraction Division button, it will pop up the difficulty level which you can choose. Then it moves into the screen where you can play the game.
 
-<img width="455" alt="Screenshot_20221129_015459" src="https://user-images.githubusercontent.com/113261541/204656835-f8cc529c-0cfe-454f-bd8a-1c7db8c32fbd.png">
+<img width="461" alt="Screenshot_20221205_030214" src="https://user-images.githubusercontent.com/113261541/205762332-9685fc99-d03f-42d9-8906-9ab38972beb8.png">
 
 ### Fouth screen:
 This is the main screen where you can play the game.
@@ -35,7 +35,7 @@ This is the main screen where you can play the game.
 ### Fifth screen:
 Here you can feed the pet after bingo.
 
-<img width="455" alt="Screenshot_20221129_015622" src="https://user-images.githubusercontent.com/113261541/204657152-4c0f37a2-0e7b-4639-9518-c21247a0601c.png">
+<img width="458" alt="Screenshot_20221205_030231" src="https://user-images.githubusercontent.com/113261541/205762379-7cb6eac1-414f-4494-a7ce-b9537e4c5efe.png">
 
 ### Sixth Screen:
 Here is the report card of every player for each question.
