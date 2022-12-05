@@ -6,19 +6,15 @@ using UnityEngine.SceneManagement;
 public class AutoScreenMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    private float timer = 9f;
+    private float timer = 5f;
     private float timeElapsed;
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         timeElapsed += Time.deltaTime;
-    if (timeElapsed>timer) {
+        if (timeElapsed>timer) {
+            //Scene2 will be loaded after timer ends
             SceneManager.LoadScene("scene2");
-    }
+        }       
     }
 }

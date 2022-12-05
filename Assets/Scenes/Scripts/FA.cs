@@ -27,7 +27,6 @@ public static class Extensions
 
 public class FA : MonoBehaviour
 {
-    [SerializeField] List<AudioSource> gameSounds = new List<AudioSource>();
     public static string levelSelect;
     public static FA faInstance;
 
@@ -52,22 +51,15 @@ public class FA : MonoBehaviour
     public Stack FractionAStack = new Stack(); //this stack will contain the fraction on the left side 
     public Stack FractionBStack = new Stack(); //this stack will contain the fraction on the right side
     public Stack ResultStack = new Stack(); //this stack will contain the result of fraction subtraction operations from elements of the previous two stacks
-    Stack CheckGreaterFractionStack = new Stack(); //this stack will help us store the value of CheckGreaterFraction
-
     public List<Fraction> FractionAList = new List<Fraction>(); //this list will contain a record of the left fraction even after they have been popped out of their stack
     public List<Fraction> FractionBList = new List<Fraction>(); //this list will contain a record of the right fraction after they have been popped out of their stack
     public List<Fraction> ResultList = new List<Fraction>(); //this list will contain a record of the subtraction result fraction after they have been popped out of their stack
-
     static int RandomNumerator_A = 0; //Random.Range(1, 9); //this will generate a random number between 1 and 9, and it will be the numerator of the fraction on the left side
     static int RandomNumerator_B = 0; //Random.Range(1, 9); //this will generate a random number between 1 and 9, and it will be the numerator of the fraction on the right side
     static int RandomCommonDenominator = 1; //Random.Range(1, 9); //this will generate a random number between 1 and 9, and it will be the denominator for both fractions
-
     public static Fraction FractionA = new Fraction(RandomNumerator_A, RandomCommonDenominator);//this is a fraction on the left side, created with the values of RandomNumerator_left and CommonDenominator
     public static Fraction FractionB = new Fraction(RandomNumerator_B, RandomCommonDenominator); //this is a fraction on the left side, created with the values of  RandomNumerator_right and RandomCommonDenominator
     public static Fraction ResultFraction = FractionA.Add(FractionB); //this is a fraction created from subtracting RandomNumerator_right from RandomNumerator_left
-
-    decimal CheckGreaterFraction = 0; //this will help calculate the difference between fraction A and B, which we will use to determine where fraction A or B should go in order to avoid negative results 
-
     public GameObject gameOver, bingo, CongratulatePanelApple, CongratulatePanelStraw, CongratulatePanelGrapes;
     
 
@@ -80,8 +72,8 @@ public class FA : MonoBehaviour
     public static int medScore;
     public static int hardScore;
     public static int easyProblemCount;
-    public static int hardProblemCount;
     public static int medProblemCount;
+    public static int hardProblemCount;
     public static string bingoType;
     public static bool h1 = true;
     public static bool h2 = true;
@@ -123,41 +115,36 @@ public class FA : MonoBehaviour
 
     public List<Fraction> bingo_d1 = new List<Fraction>(5);
     public List<Fraction> bingo_d2 = new List<Fraction>(5);
-
+    // This function is used to create the list to display the numbers on the button
     void AddElementsToTheirStacks()
     {
         for (int i = 0; i < 25; i++)
         {
             if (levelSelect == "EASY")
             {
-                RandomNumerator_A = UnityEngine.Random.Range(1, 10);
-                RandomNumerator_B = UnityEngine.Random.Range(1, 10);
+                RandomNumerator_A = Random.Range(1, 10);
+                RandomNumerator_B = Random.Range(1, 10);
                 RandomCommonDenominator = 2;
                
             }
             else if (levelSelect == "MEDIUM")
             {
-                RandomNumerator_A = UnityEngine.Random.Range(11, 20);
-                RandomNumerator_B = UnityEngine.Random.Range(11, 20);
+                RandomNumerator_A = Random.Range(11, 20);
+                RandomNumerator_B = Random.Range(11, 20);
                 RandomCommonDenominator = 5;
               
             }
             else if (levelSelect == "HARD")
             {
-                RandomNumerator_A = UnityEngine.Random.Range(21, 30);
-                RandomNumerator_B = UnityEngine.Random.Range(21, 30);
-                RandomCommonDenominator = UnityEngine.Random.Range(1, 10);
+                RandomNumerator_A = Random.Range(21, 30);
+                RandomNumerator_B = Random.Range(21, 30);
+                RandomCommonDenominator = Random.Range(1, 10);
                
             }
 
             FractionA = new Fraction(RandomNumerator_A, RandomCommonDenominator);
             FractionB = new Fraction(RandomNumerator_B, RandomCommonDenominator);
-            CheckGreaterFraction = FractionA.ToDecimal() + FractionB.ToDecimal();
-
-            CheckGreaterFractionStack.Push(CheckGreaterFraction);
-
-            if (CheckGreaterFraction < 0) ResultFraction = FractionB.Add(FractionA);
-            else ResultFraction = FractionA.Add(FractionB);
+            ResultFraction = FractionA.Add(FractionB);
 
             FractionAStack.Push(FractionA);
             FractionAList.Add(FractionA);
@@ -229,7 +216,6 @@ public class FA : MonoBehaviour
         btn25.onClick.AddListener(ToDoWhenButtonClicked);
 
     }
-
     //This method is used to populate the UI with responses on buttons, and questions on the specified text area
     void ShowQuestionAndAnswerOptionsToScreen()
     {
@@ -288,7 +274,7 @@ public class FA : MonoBehaviour
         textObject24.text = ResultList.ElementAt(23).ToString(); //ResultStack.Pop().ToString();
         textObject25.text = ResultList.ElementAt(24).ToString(); //ResultStack.Pop().ToString();
 
-        //questionTextObject.text = "Fraction B + Fraction A = \n" + c;
+        //Displays text in the question text
         questionTextObject.text = FractionAStack.Peek().ToString() + " + "
                               + FractionBStack.Peek().ToString() + "\n= ?";
         string FractionAString;
@@ -329,56 +315,44 @@ public class FA : MonoBehaviour
                 RightDen = 1;
             }
         }
+        //Displays text in the hint
         hintTextObject.text = "( " + "( " + LeftNum.ToString() + " * " + RightDen.ToString() + " )" + " + " + "( " + RightNum.ToString() + " * " +
             LeftDen.ToString() + " )" + " )" + " / " + "( " + LeftDen.ToString() + " * " + RightDen.ToString() + " )";
     }
-
-
+    //This function is called when the button is clicked
     void ToDoWhenButtonClicked()
     {
-        
-
         var textOnCurrentButton = GameObject.Find(EventSystem.current.currentSelectedGameObject.name).GetComponent<Button>().GetComponentInChildren<Text>().text;
-
         string currentButtonName = EventSystem.current.currentSelectedGameObject.name;
         int currentButtonNumber = int.Parse(string.Concat(currentButtonName.Where(char.IsDigit)));
-
-        Debug.Log("ResultStack.Pop().ToString() : " + ResultStack.Peek().ToString());
-        Debug.Log("textOnCurrentButton.ToString() : " + textOnCurrentButton.ToString());
-        Debug.Log("FractionAStack count : " + FractionAStack.Count);
-        Debug.Log("FractionBStack count : " + FractionBStack.Count);
-        Debug.Log("Clicked button name: " + currentButtonName);
-        Debug.Log("Clicked button number: " + currentButtonNumber);
-
         if (ResultStack.Pop().ToString().Equals(textOnCurrentButton.ToString()))
-        {
-           
+        {       
             FractionAStack.Pop();
             FractionBStack.Pop();
             ResultList[currentButtonNumber - 1] = 00;
             markRight(currentButtonNumber);
             if (levelSelect == "EASY")
             {
-                easyScore = easyScore + 1;
-                easyProblemCount += 1;
+                easyScore = PlayerPrefs.GetInt("easyScore") + 1;
+                easyProblemCount = PlayerPrefs.GetInt("easyProblemCount") + 1;
+                PlayerPrefs.SetInt("easyScore", easyScore);
+                PlayerPrefs.SetInt("easyProblemCount", easyProblemCount);
             }
             if (levelSelect == "MEDIUM")
             {
-                medScore = medScore + 1;
-                medProblemCount += 1;
+                medScore = PlayerPrefs.GetInt("medScore") + 1;
+                medProblemCount = PlayerPrefs.GetInt("medProblemCount") + 1;
+                PlayerPrefs.SetInt("medScore", medScore);
+                PlayerPrefs.SetInt("medProblemCount", medProblemCount);
             }
             if (levelSelect == "HARD")
             {
-                hardScore = hardScore + 1;
-                hardProblemCount += 1;
+                hardScore = PlayerPrefs.GetInt("hardScore") + 1;
+                hardProblemCount = PlayerPrefs.GetInt("hardProblemCount") + 1;             
+                PlayerPrefs.SetInt("hardScore", hardScore);
+                PlayerPrefs.SetInt("hardProblemCount", hardProblemCount);
             }
-
-            //Play sound for correct answer
-            //gameSounds[0].Play();
-
-            //Change display image of button to rabbit image on top of button and make button not clickable
             GameObject.Find(EventSystem.current.currentSelectedGameObject.name).GetComponent<Button>().interactable = false;
-            //Show next question
             questionTextObject.text = FractionAStack.Peek().ToString() + " + "
                          + FractionBStack.Peek().ToString() + "\n= ? ";
         }
@@ -392,15 +366,19 @@ public class FA : MonoBehaviour
 
             if (levelSelect == "EASY")
             {
-                easyProblemCount += 1;
+                easyProblemCount = PlayerPrefs.GetInt("easyProblemCount") + 1; 
+                PlayerPrefs.SetInt("easyProblemCount", easyProblemCount);
+
             }
             if (levelSelect == "MEDIUM")
             {
-                medProblemCount += 1;
+                medProblemCount = PlayerPrefs.GetInt("medProblemCount") + 1;
+                PlayerPrefs.SetInt("medProblemCount", FA.medProblemCount);
             }
             if (levelSelect == "HARD")
             {
-                hardProblemCount += 1;
+                hardProblemCount = PlayerPrefs.GetInt("hardProblemCount") + 1;
+                PlayerPrefs.SetInt("hardProblemCount", FA.hardProblemCount);
             }
 
             //ResultList[currentButtonNumber - 1] = 00;
@@ -459,16 +437,9 @@ public class FA : MonoBehaviour
         hintTextObject.text = "( " + "( " + LeftNum.ToString() + " * " + RightDen.ToString() + " )" + " + " + "( " + RightNum.ToString() + " * " +
              LeftDen.ToString() + " )" + " )" + " / " + "( " + LeftDen.ToString() + " * " + RightDen.ToString() + " )";
     }
-
-
+    //If bingo happens then this method is used to increment the fruit
     public void isBingo()
     {
-
-        for (int i = 0; i < 5; i++)
-        {
-            Debug.Log(bingo_h1[i]);
-        }
-
         h_1 = bingo_h1.TrueForAll(p => p == 00);
         h_2 = bingo_h2.TrueForAll(p => p == 00);
         h_3 = bingo_h3.TrueForAll(p => p == 00);
@@ -484,33 +455,35 @@ public class FA : MonoBehaviour
 
         if (h_1 || h_2 || h_3 || h_4 || h_5 || v_1 || v_2 || v_3 || v_4 || v_5 || d_1 || d_2)
         {
-            if(h_1 || h_2 || h_3 || h_4 || h_5)
+            if (h_1 || h_2 || h_3 || h_4 || h_5)
             {
                 bingoType = "hBingo";
-                incrementAppleBingo = incrementAppleBingo + 1;
-
+                incrementAppleBingo = PlayerPrefs.GetInt("incrementAppleBingo") + 1;
+                PlayerPrefs.SetInt("incrementAppleBingo",incrementAppleBingo);
             }
             else if (v_1 || v_2 || v_3 || v_4 || v_5)
             {
                 bingoType = "vBingo";
-                incrementStrawBingo= incrementStrawBingo + 1;
+                incrementStrawBingo= PlayerPrefs.GetInt("incrementStrawBingo") + 1;
+                PlayerPrefs.SetInt("incrementStrawBingo", incrementStrawBingo);
             }
             else
             {
                 bingoType = "dBingo";
-                incrementGrapesBingo= incrementGrapesBingo + 1; 
+                incrementGrapesBingo= PlayerPrefs.GetInt("incrementGrapesBingo") + 1;
+                PlayerPrefs.SetInt("incrementGrapesBingo", incrementGrapesBingo);
             }
             myBingo = true;
             bingo.SetActive(true);
             questionTextObject.text = "";
-            Debug.Log("Bingo!");
+            //Debug.Log("Bingo!");
             resetVariables();
             clearEverything();
             string bingoOrNot = "BINGO";
             StartCoroutine(SceneLoader(bingoOrNot));
         }
     }
-
+    //This method checks if the bingo is possible or not.
     public void isBingoPossible()
     {
         if (h1 == false && h2 == false && h3 == false && h4 == false && h5 == false && v1 == false && v2 == false && v3 == false
@@ -519,14 +492,14 @@ public class FA : MonoBehaviour
             bingoPossible = false;
             questionTextObject.text = "";
             gameOver.SetActive(true);
-            Debug.Log("Game Over!");
+            //Debug.Log("Game Over!");
             resetVariables();
             clearEverything();
             string bingoOrNot = "NOT BINGO";
             StartCoroutine(SceneLoader(bingoOrNot));
         }
     }
-
+    //This methos is called if the wrong answer is marked
     public void markWrong(int currentButtonNumber)
     {
         if (currentButtonNumber-1 == 0)
@@ -845,7 +818,7 @@ public class FA : MonoBehaviour
             }
         }
     }
-
+    //This method is called if the answer is right
     public void markRight(int currentButtonNumber)
     {
         if (currentButtonNumber-1 == 0)
@@ -984,7 +957,7 @@ public class FA : MonoBehaviour
             bingo_d1[4] = 00;
         }
     }
-
+    //This method ts used to reset all the variables once the bingo happens or if there are no more moves
     public void resetVariables()
     {
         h1 = true;
@@ -1016,6 +989,7 @@ public class FA : MonoBehaviour
         bingoPossible = true;
         myBingo = false;
     }
+    //This method is used to display the congratulate panel if the bingo happens
     IEnumerator SceneLoader(string bingoOrNot)
     {
         if (bingoOrNot == "BINGO")
@@ -1042,11 +1016,10 @@ public class FA : MonoBehaviour
             SceneManager.LoadScene("Scene3");
         }
     }
-
-
+    //This method is used to clear everything after the bingo happens
     public void clearEverything()
     {
-        Debug.Log("clear everything()");
+        //Debug.Log("clear everything()");
         ResultList.Clear();
         bingo_h1.Clear();
         bingo_h2.Clear();
@@ -1061,12 +1034,9 @@ public class FA : MonoBehaviour
         bingo_d1.Clear();
         bingo_d2.Clear();
     }
-
+    //This methos creates the rows and columns for bingo
     public void populateCorrectBingo()
-    {
-        Debug.Log("populate correctBingo()");
-
-        
+    { 
         for (int i = 0; i < 5; i++)
         {
             bingo_h1.Insert(i, ResultList[i]);

@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
+    //This method is used to get the text for level(easy, medium, hard) selection
     public void getText()
     {
         TextMeshProUGUI txt = transform.Find("Text").GetComponent<TextMeshProUGUI>();

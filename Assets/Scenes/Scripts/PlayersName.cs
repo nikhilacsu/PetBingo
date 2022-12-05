@@ -1,21 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 public class PlayersName : MonoBehaviour
 {
     public string userNames;
-    // Start is called before the first frame update
+    // This method is used to display the name of the player in every screen
     void Start()
     {
-        userNames = buttoncontrol.userName.ToString() + "'s";
-        GetComponent<TMP_Text>().text = userNames;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<TMP_Text>().text = PlayerPrefs.GetString("Name")+"'s";
     }
 }

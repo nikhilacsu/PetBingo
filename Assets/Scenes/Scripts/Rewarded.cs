@@ -6,27 +6,27 @@ using System;
 
 public class Rewarded : MonoBehaviour
 {
-   private RewardedAd rewardedAd;
+    private RewardedAd rewardedAd;
 
-   public void Start()
-   {
-     MobileAds.Initialize(initialize => {});
-     RequestRewardedVideo();
+    public void Start()
+    {
+        MobileAds.Initialize(initialize => { });
+        RequestRewardedVideo();
 
-     if(rewardedAd.IsLoaded())
-        rewardedAd.Show();
-   }
+        if (rewardedAd.IsLoaded())
+            rewardedAd.Show();
+    }
 
     public void RequestRewardedVideo()
     {
         string adUnitId;
-        #if UNITY_ANDROID
-            adUnitId = "ca-app-pub-3940256099942544/5224354917";
-        #elif UNITY_IPHONE
+#if UNITY_ANDROID
+        adUnitId = "ca-app-pub-3940256099942544/5224354917";
+#elif UNITY_IPHONE
             adUnitId = "ca-app-pub-3940256099942544/1712485313";
-        #else
+#else
             adUnitId = "unexpected_platform";
-        #endif
+#endif
 
         this.rewardedAd = new RewardedAd(adUnitId);
 
@@ -37,8 +37,8 @@ public class Rewarded : MonoBehaviour
         // Called when an ad is shown.
         this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
         // Called when an ad request failed to show.
-        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
-        // Called when the user should be rewarded for interacting with the ad.
+/*        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+*/        // Called when the user should be rewarded for interacting with the ad.
         this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         // Called when the ad is closed.
         this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
@@ -56,7 +56,7 @@ public class Rewarded : MonoBehaviour
 
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-       
+
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
@@ -64,12 +64,12 @@ public class Rewarded : MonoBehaviour
         MonoBehaviour.print("HandleRewardedAdOpening event received");
     }
 
-    public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
+   /* public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
     {
         MonoBehaviour.print(
             "HandleRewardedAdFailedToShow event received with message: "
                              + args.Message);
-    }
+    }*/
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {

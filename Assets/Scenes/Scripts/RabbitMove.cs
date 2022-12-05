@@ -1,13 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class RabbitMove : MonoBehaviour
-{
-    void start()
-    {
-
-    }
+{   //This method is used to move the rabbit forward
     void Update()
     {
         transform.Translate(1.8f, 0f, 0f);

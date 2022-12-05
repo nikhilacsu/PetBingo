@@ -6,40 +6,40 @@ using System.Numerics;
 using System.Linq;
 using Fractions; //Nugget Package
 using UnityEngine.EventSystems;
-using System.Diagnostics.Tracing;
+using System.Diagnostics.Tracing; 
 using TMPro;
 
 public class ReportCardScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static ReportCardScript Instance;
     public Text  EasyPercentage, MedPercentage, HardPercentage, EasyCorrect, MedCorrect, HardCorrect;
     public TextMeshProUGUI PlayerName,editText;
-    void Start()
+    public void Start()
     {
-        EasyCorrect.GetComponent<Text>().text = "Answered correctly "+ FA.easyScore  +" out of "+FA.easyProblemCount +" questions";
-        MedCorrect.GetComponent<Text>().text = "Answered correctly " + FA.medScore + " out of " + FA.medProblemCount + " questions";
-        HardCorrect.GetComponent<Text>().text = "Answered correctly " + FA.hardScore + " out of " + FA.hardProblemCount + " questions";
-
-
-        if (FA.easyProblemCount != 0)
+        EasyCorrect.GetComponent<Text>().text = "Answered correctly "+ PlayerPrefs.GetInt("easyScore")  +" out of "+ PlayerPrefs.GetInt("easyProblemCount") + " questions";
+        MedCorrect.GetComponent<Text>().text = "Answered correctly " + PlayerPrefs.GetInt("medScore") + " out of " + PlayerPrefs.GetInt("medProblemCount") + " questions";
+        HardCorrect.GetComponent<Text>().text = "Answered correctly " + PlayerPrefs.GetInt("hardScore") + " out of " + PlayerPrefs.GetInt("hardProblemCount") + " questions";
+        
+        if (PlayerPrefs.GetInt("easyProblemCount") != 0)
         {
-            EasyPercentage.GetComponent<Text>().text = (int)((FA.easyScore / (float)FA.easyProblemCount) * 100) + "%";
+            EasyPercentage.GetComponent<Text>().text = (int)((PlayerPrefs.GetInt("easyScore") / (float)PlayerPrefs.GetInt("easyProblemCount")) * 100) + "%";
         }
         else
         {
             EasyPercentage.GetComponent<Text>().text = 0 + "%";
         }
-        if (FA.hardProblemCount != 0)
+        if (PlayerPrefs.GetInt("medProblemCount") != 0)
         {
-            MedPercentage.GetComponent<Text>().text = (int)((FA.medScore / (float)FA.medProblemCount) * 100) + "%";
+            MedPercentage.GetComponent<Text>().text = (int)((PlayerPrefs.GetInt("medScore") / (float)PlayerPrefs.GetInt("medProblemCount")) * 100) + "%";
         }
         else
         {
             MedPercentage.GetComponent<Text>().text= 0 + "%";
         }
-        if (FA.hardProblemCount != 0)
+        if (PlayerPrefs.GetInt("hardProblemCount") != 0)
         {
-            HardPercentage.GetComponent<Text>().text = (int)((FA.hardScore / (float)FA.hardProblemCount) * 100) + "%";
+            HardPercentage.GetComponent<Text>().text = (int)((PlayerPrefs.GetInt("hardScore") / (float)PlayerPrefs.GetInt("hardProblemCount")) * 100) + "%";
         }
         else
         {
@@ -47,24 +47,21 @@ public class ReportCardScript : MonoBehaviour
         }
     }
 
+    
     public void deletePlayer()
     {
-        EasyCorrect.GetComponent<Text>().text = "Answered correctly 0 out 0 times.";
-        MedCorrect.GetComponent<Text>().text = "Answered correctly 0 out 0 times.";
-        HardCorrect.GetComponent<Text>().text = "Answered correctly 0 out 0 times.";
-        FA.easyScore = 0;
-        FA.medScore = 0;
-        FA.hardScore = 0;
-        FA.hardProblemCount = 0;
-        FA.medProblemCount = 0;
-        FA.easyProblemCount = 0;
-        EasyPercentage.GetComponent<Text>().text = 0 + "%";
-        MedPercentage.GetComponent<Text>().text = 0+ "%";
-        HardPercentage.GetComponent<Text>().text = 0 + "%";
+        PlayerPrefs.SetInt("easyScore", 0);
+        PlayerPrefs.SetInt("medScore", 0);
+        PlayerPrefs.SetInt("easyScore", 0);
+        PlayerPrefs.SetInt("easyProblemCount", 0);
+        PlayerPrefs.SetInt("medProblemCount", 0);
+        PlayerPrefs.SetInt("hardProblemCount", 0);
+        Start();
     }
     public void resetPlayer()
     {
-        PlayerName.GetComponent<TMP_Text>().text = "PLAYER1";
+        PlayerPrefs.SetString("Name", "Player");
+        PlayerName.GetComponent<TMP_Text>().text = PlayerPrefs.GetString("Name");
     }
 
     public void editPlayerName()
